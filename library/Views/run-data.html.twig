@@ -1,0 +1,23 @@
+<div>
+    <table>
+        <caption>Train Info</caption>
+        <thead
+            <tr>
+                <td>Train Line</td>
+                <td>Route</td>
+                <td>Run Number</td>
+                <td>Operator ID</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for run in runs %}
+            <tr>
+                <td>{{ run.line }}</td>
+                <td>{{ run.route }}</td>
+                <td>{{ run.number }}</td>
+                <td>{{ run.operatorId }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

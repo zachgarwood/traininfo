@@ -1,25 +1,27 @@
 <?php
 namespace TrainInfo\Controllers;
 
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use TrainInfo\Models\Run;
+use TrainInfo\Repositories;
 
 class RunDataUpload
 {
-    private $runs = [];
+    private $runRepository = [];
 
-    public function __construct($filename) {
+    public function addFromFile(Request $request, Application $app)
+    {
+        $filename = $request->files->get($app['file_upload_name'])->getPathname();
         $file = fopen($filename, 'r');
         $labels = fgetcsv($file);
         while (($line = fgetcsv($file)) !== false) {
             list($line, $route, $number, $operatorId) = $this->parseLine($line);
-            $this->runs[$number] = new Run($line, $route, $number, $operatorId);
+            $app['repositories.runs']->addRun(new Run($line, $route, $number, $operatorId));
         }
-        ksort($this->runs);
-    }
-    
-    public function getRuns()
-    {
-        return $this->runs;
+
+        return $app->handle(Request::create('/runs', 'GET'), HttpKernelInterface::SUB_REQUEST);
     }
 
     private function parseLine($line)
