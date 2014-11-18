@@ -20,6 +20,9 @@ $app['controllers.run_data_upload'] = $app->share(function() {
 $app['file_upload_name'] = 'run_data';
 
 // Routes
+$app->get('/', function () use ($app) {
+    return $app->redirect('/runs');
+});
 $app->get('/runs', 'TrainInfo\\Controllers\\Runs::index');
 $app->post('/upload', 'TrainInfo\\Controllers\\RunDataUpload::addFromFile');
 
