@@ -12,7 +12,6 @@ class RunDataUploadTest extends \PHPUnit_Framework_TestCase
 
     public function testRunsSortedByRunNumber()
     {
-
         $previousRunNumber = '';
         foreach ($this->upload->getRuns() as $run) {
             $this->assertTrue($run->number > $previousRunNumber);
