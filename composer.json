@@ -1,0 +1,19 @@
+{
+    "name": "zachgarwood/traininfo",
+    "description": "Upload and display your favorite train runs",
+    "authors": [
+        {
+            "name": "Zach Garwood",
+            "email": "zachgarwood@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {"psr-4": {"TrainInfo\\": "library/"}},
+    "require": {
+        "php": ">=5.4",
+        "silex/silex": "~1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
